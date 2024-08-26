@@ -1,5 +1,5 @@
 import {Route, Routes, useLocation} from "react-router-dom";
-import {AppLayout} from "@app/layout/app-layout.tsx";
+import {AppLayout} from "@app/layout";
 import App from "@app/app.tsx";
 
 export function AppRoutes() {
