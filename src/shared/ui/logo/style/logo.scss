@@ -1,0 +1,15 @@
+.logo {
+	* {
+		transition: .2s all;
+	}
+
+	&:hover {
+		.logo__icon {
+			filter: drop-shadow(2px -1px 10px var(--ant-color-primary));
+		}
+
+		.logo__text {
+			text-shadow: 2px -1px 10px var(--ant-color-primary);
+		}
+	}
+}

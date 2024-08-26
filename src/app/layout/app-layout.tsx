@@ -1,17 +1,18 @@
 import {Layout, theme} from "antd";
-import {Content, Header} from "antd/es/layout/layout";
+import {Content} from "antd/es/layout/layout";
 import {Outlet} from "react-router-dom";
-import {AppSidebar} from "@widgets/app-sidebar";
+import {Sidebar} from "@widgets/sidebar";
+import {Header} from "@widgets/header";
 
 export function AppLayout() {
 	const {token: {colorBgContainer, borderRadiusLG}} = theme.useToken();
 
 	return (
 		<Layout style={{minHeight: "100dvh"}}>
-			<Header style={{backgroundColor: colorBgContainer}}/>
+			<Header/>
 			<Content style={{padding: "3rem 6rem"}}>
 				<Layout style={{background: colorBgContainer, borderRadius: borderRadiusLG}}>
-					<AppSidebar/>
+					<Sidebar/>
 					<Content style={{padding: "3rem"}}>
 						<Outlet/>
 					</Content>

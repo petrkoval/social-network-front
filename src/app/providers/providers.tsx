@@ -14,7 +14,8 @@ export function Providers({children}: { children: React.ReactNode }) {
 						colorPrimary: '#00ff93',
 						colorLink: '#00ff93',
 						colorLinkHover: '#69ffc2'
-					}
+					},
+					cssVar: true
 				}}>
 					<BrowserRouter>
 						{children}
