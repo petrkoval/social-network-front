@@ -1,7 +1,7 @@
 import {Layout, theme} from "antd";
 import {Content, Header} from "antd/es/layout/layout";
-import Sider from "antd/es/layout/Sider";
 import {Outlet} from "react-router-dom";
+import {AppSidebar} from "../../widgets/app-sidebar";
 
 export function AppLayout() {
 	const {token: {colorBgContainer, borderRadiusLG}} = theme.useToken();
@@ -9,11 +9,9 @@ export function AppLayout() {
 	return (
 		<Layout style={{minHeight: "100dvh"}}>
 			<Header style={{backgroundColor: colorBgContainer}}/>
-			<Content style={{
-				padding: "3rem"
-			}}>
+			<Content style={{padding: "3rem 6rem"}}>
 				<Layout style={{background: colorBgContainer, borderRadius: borderRadiusLG}}>
-					<Sider style={{width: "200px", backgroundColor: colorBgContainer}}/>
+					<AppSidebar/>
 					<Content style={{padding: "3rem"}}>
 						<Outlet/>
 					</Content>
