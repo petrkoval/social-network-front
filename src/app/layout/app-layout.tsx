@@ -1,7 +1,7 @@
 import {Layout, theme} from "antd";
 import {Content, Header} from "antd/es/layout/layout";
 import {Outlet} from "react-router-dom";
-import {AppSidebar} from "../../widgets/app-sidebar";
+import {AppSidebar} from "@widgets/app-sidebar";
 
 export function AppLayout() {
 	const {token: {colorBgContainer, borderRadiusLG}} = theme.useToken();
