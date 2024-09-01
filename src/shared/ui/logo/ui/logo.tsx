@@ -5,27 +5,29 @@ import "../style/logo.scss";
 
 interface Props {
 	justify: string;
+	descr?: boolean;
 }
 
-export function Logo({ justify }: Props) {
+export function Logo({justify, descr = false}: Props) {
 	const {token: {colorPrimary, colorTextBase}} = theme.useToken();
 
 	return (
-		<div className="logo" style={{
-			display: "flex",
-			alignItems: "flex-end",
-			justifyContent: justify,
-			gap: ".5rem",
-			userSelect: "none",
-		}}>
+		<div className="logo" style={{justifyContent: justify}}>
+
 			<CodeOutlined className="logo__icon" style={{fontSize: "2.5rem", color: colorPrimary}}/>
-			<span className="logo__text" style={{
-				lineHeight: "normal",
-				fontSize: "2rem",
-				color: colorTextBase
-			}}>
-				Codium
-			</span>
+
+			<div className="logo__text">
+				<span className="logo__title" style={{color: colorTextBase}}>
+					Codium
+				</span>
+				{
+					descr &&
+                    <span className="logo__descr" style={{color: colorPrimary}}>
+						code network
+					</span>
+				}
+			</div>
+
 		</div>
 	)
 }

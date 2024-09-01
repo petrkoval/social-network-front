@@ -1,6 +1,25 @@
 .logo {
-	* {
-		transition: .2s all;
+	display: flex;
+	align-items: center;
+	gap: .5rem;
+	user-select: none;
+
+	&__text {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+
+	&__title {
+		font-size: 2rem;
+		line-height: 1;
+		letter-spacing: 1px;
+	}
+
+	&__descr {
+		line-height: 1;
+		font-family: monospace;
 	}
 
 	&:hover {
@@ -8,8 +27,12 @@
 			filter: drop-shadow(2px -1px 10px var(--ant-color-primary));
 		}
 
-		.logo__text {
+		.logo__title, .logo__descr {
 			text-shadow: 2px -1px 10px var(--ant-color-primary);
 		}
+	}
+
+	* {
+		transition: .2s all;
 	}
 }

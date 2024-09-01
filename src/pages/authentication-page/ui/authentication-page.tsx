@@ -21,7 +21,7 @@ export function AuthenticationPage() {
 				borderRadius: borderRadiusLG,
 			}}>
 				<Form.Item>
-					<Logo justify="center"/>
+					<Logo justify="center" descr/>
 				</Form.Item>
 
 				<Form.Item<FieldType>
