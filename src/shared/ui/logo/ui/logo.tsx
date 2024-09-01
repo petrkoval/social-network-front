@@ -3,14 +3,20 @@ import {theme} from "antd";
 
 import "../style/logo.scss";
 
-export function Logo() {
+interface Props {
+	justify: string;
+}
+
+export function Logo({ justify }: Props) {
 	const {token: {colorPrimary, colorTextBase}} = theme.useToken();
 
 	return (
 		<div className="logo" style={{
 			display: "flex",
 			alignItems: "flex-end",
-			gap: ".5rem"
+			justifyContent: justify,
+			gap: ".5rem",
+			userSelect: "none",
 		}}>
 			<CodeOutlined className="logo__icon" style={{fontSize: "2.5rem", color: colorPrimary}}/>
 			<span className="logo__text" style={{
@@ -18,7 +24,7 @@ export function Logo() {
 				fontSize: "2rem",
 				color: colorTextBase
 			}}>
-				Network
+				Codium
 			</span>
 		</div>
 	)

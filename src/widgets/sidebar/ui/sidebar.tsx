@@ -2,7 +2,7 @@ import {Menu, MenuProps, theme} from "antd";
 import Sider from "antd/es/layout/Sider";
 
 export function Sidebar() {
-	const {token: {colorBgContainer}} = theme.useToken();
+	const {token: {colorBgContainer, borderRadiusLG}} = theme.useToken();
 
 	const items: MenuProps['items'] = Array(10).fill(0).map((_, i) => ({
 		key: i,
@@ -10,8 +10,9 @@ export function Sidebar() {
 	}));
 
 	return (
-		<Sider style={{backgroundColor: colorBgContainer}}>
+		<Sider style={{backgroundColor: colorBgContainer, borderRadius: borderRadiusLG}}>
 			<Menu
+				style={{borderRadius: borderRadiusLG}}
 				items={items}
 				mode="inline"
 			/>

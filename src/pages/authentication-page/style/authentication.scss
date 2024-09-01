@@ -1,0 +1,9 @@
+.authentication {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	&__form {
+		padding: 2rem;
+	}
+}
