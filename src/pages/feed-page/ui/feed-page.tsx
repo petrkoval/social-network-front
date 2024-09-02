@@ -1,9 +1,8 @@
-import {PostInFeed} from "@entities/post";
-
 import "../style/feed-page.scss";
+import {Feed} from "@widgets/feed";
 
 export function FeedPage() {
-	const posts = [0, 0, 0];
-
-	return posts.map(() => <PostInFeed/>)
+	return (
+		<Feed/>
+	)
 }
