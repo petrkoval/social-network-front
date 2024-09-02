@@ -6,15 +6,15 @@ import {Header} from "@widgets/header";
 import {motion} from "framer-motion";
 
 export function AppLayout() {
-	const {token: {colorBgContainer, borderRadiusLG}} = theme.useToken();
+	const {token: {borderRadiusLG}} = theme.useToken();
 
 	return (
 		<Layout style={{minHeight: "100dvh"}}>
 			<Header/>
 			<Content style={{padding: "3rem 20rem"}}>
-				<Layout style={{background: colorBgContainer, borderRadius: borderRadiusLG}}>
+				<Layout style={{borderRadius: borderRadiusLG}}>
 					<Sidebar/>
-					<Content style={{padding: "3rem"}}>
+					<Content style={{paddingLeft: "1rem"}}>
 						<motion.div
 							initial={{opacity: 0}}
 							animate={{opacity: 1}}
