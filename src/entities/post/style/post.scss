@@ -31,6 +31,10 @@
 		justify-content: center;
 	}
 
+	&__time {
+		opacity: .5;
+	}
+
 	&__actions {
 		display: flex;
 		align-items: center;

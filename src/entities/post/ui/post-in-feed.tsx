@@ -1,11 +1,11 @@
 import {theme} from "antd";
 import {Link} from "react-router-dom";
+import {useState} from "react";
+import {LikeBtn} from "@widgets/like-btn";
 
 import "../style/post.scss";
 
 import avatarUrl from "@shared/assets/img/avatar.png";
-import {useState} from "react";
-import {LikeBtn} from "@widgets/like-btn";
 
 export function PostInFeed() {
 	const {
