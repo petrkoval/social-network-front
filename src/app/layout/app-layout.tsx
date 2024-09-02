@@ -11,7 +11,7 @@ export function AppLayout() {
 	return (
 		<Layout style={{minHeight: "100dvh"}}>
 			<Header/>
-			<Content style={{padding: "3rem 6rem"}}>
+			<Content style={{padding: "3rem 20rem"}}>
 				<Layout style={{background: colorBgContainer, borderRadius: borderRadiusLG}}>
 					<Sidebar/>
 					<Content style={{padding: "3rem"}}>

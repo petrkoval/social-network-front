@@ -4,11 +4,11 @@ import {theme} from "antd";
 import "../style/logo.scss";
 
 interface Props {
-	justify: string;
+	justify?: string;
 	descr?: boolean;
 }
 
-export function Logo({justify, descr = false}: Props) {
+export function Logo({justify = "center", descr = false}: Props) {
 	const {token: {colorPrimary, colorTextBase}} = theme.useToken();
 
 	return (
