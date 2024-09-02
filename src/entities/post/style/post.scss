@@ -1,12 +1,14 @@
 .post {
 	border: 1px solid;
 
+	& > * {
+		padding: .5rem 1rem;
+	}
+
 	&__header {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-
-		padding: .5rem 1rem;
 	}
 
 	&__avatar {
@@ -29,7 +31,9 @@
 		justify-content: center;
 	}
 
-	&__content {
-		padding: .5rem 1rem;
+	&__actions {
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
 	}
 }

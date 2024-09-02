@@ -1,11 +1,26 @@
-import "../style/post.scss";
-
-import avatarUrl from "@shared/assets/img/avatar.png";
 import {theme} from "antd";
 import {Link} from "react-router-dom";
 
+import "../style/post.scss";
+
+import avatarUrl from "@shared/assets/img/avatar.png";
+import {useState} from "react";
+import {LikeBtn} from "@widgets/like-btn";
+
 export function PostInFeed() {
-	const {token: {colorBorder, borderRadiusLG, colorBgContainer}} = theme.useToken();
+	const {
+		token: {
+			colorBorder,
+			borderRadiusLG,
+			colorBgContainer
+		}
+	} = theme.useToken();
+
+	const [liked, setLiked] = useState(false);
+
+	const toggleLike = () => {
+		setLiked(!liked);
+	}
 
 	return (
 		<article className="post" style={{
@@ -32,6 +47,10 @@ export function PostInFeed() {
 
 			<div className="post__content">
 				Всем прывет, это мой новый пост!!!
+			</div>
+
+			<div className="post__actions">
+				<LikeBtn active={liked} onClick={toggleLike}/>
 			</div>
 		</article>
 	)
