@@ -1,14 +1,15 @@
 import {Menu, MenuProps, theme} from "antd";
 import Sider from "antd/es/layout/Sider";
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import {AlignLeftOutlined, FormOutlined, UserOutlined} from "@ant-design/icons";
 
 export function Sidebar() {
 	const {token: {borderRadiusLG}} = theme.useToken();
+	const location = useLocation();
 
 	const items: MenuProps['items'] = [
 		{
-			key: 0,
+			key: "/create",
 			label: <Link to="/create">Создать пост</Link>,
 			icon: <FormOutlined/>
 		},
@@ -16,12 +17,12 @@ export function Sidebar() {
 			type: "divider"
 		},
 		{
-			key: "1",
+			key: "/",
 			label: <Link to="/">Моя страница</Link>,
 			icon: <UserOutlined/>
 		},
 		{
-			key: "2",
+			key: "/feed",
 			label: <Link to="/feed">Лента</Link>,
 			icon: <AlignLeftOutlined/>
 		}
@@ -32,6 +33,7 @@ export function Sidebar() {
 			<Menu
 				style={{borderRadius: borderRadiusLG}}
 				items={items}
+				selectedKeys={[location.pathname]}
 				mode="inline"
 			/>
 		</Sider>
