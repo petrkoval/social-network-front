@@ -15,7 +15,7 @@ export function Header() {
 			justifyContent: "space-between",
 			paddingInline: "20rem"
 		}}>
-			<Link to="/">
+			<Link to="/feed">
 				<Logo/>
 			</Link>
 
