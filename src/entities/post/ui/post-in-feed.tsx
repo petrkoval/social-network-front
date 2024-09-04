@@ -1,12 +1,7 @@
-import {Space, theme} from "antd";
-import {Link} from "react-router-dom";
-import {useState} from "react";
-import {LikeBtn} from "@widgets/like-btn";
+import {theme} from "antd";
+import {PostActions, PostContent, PostHeader} from "@entities/post";
 
 import "../style/post.scss";
-
-import avatarUrl from "@shared/assets/img/avatar.png";
-import {CommentBtn} from "@widgets/comment-btn";
 
 export function PostInFeed() {
 	const {
@@ -17,11 +12,6 @@ export function PostInFeed() {
 		}
 	} = theme.useToken();
 
-	const [liked, setLiked] = useState(false);
-
-	const toggleLike = () => {
-		setLiked(!liked);
-	}
 
 	return (
 		<article className="post" style={{
@@ -29,31 +19,11 @@ export function PostInFeed() {
 			borderRadius: borderRadiusLG,
 			backgroundColor: colorBgContainer,
 		}}>
-			<header className="post__header">
-				<div className="post__author-info">
-					<img src={avatarUrl} alt="author's avatar" className="post__avatar"/>
+			<PostHeader/>
 
-					<div className="post__author-info-inner">
-						<span className="post__author-name">
-							Пётр Коваль
-						</span>
-						<Link to="/" className="post__author-tag">
-							@petrkoval
-						</Link>
-					</div>
-				</div>
+			<PostContent/>
 
-				<time className="post__time">5 минут назад</time>
-			</header>
-
-			<div className="post__content">
-				Всем прывет, это мой новый пост!!!
-			</div>
-
-			<Space>
-				<LikeBtn active={liked} onClick={toggleLike}/>
-				<CommentBtn/>
-			</Space>
+			<PostActions/>
 		</article>
 	)
 }
