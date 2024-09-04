@@ -13,7 +13,7 @@ export function Header() {
 			display: "flex",
 			alignItems: "center",
 			justifyContent: "space-between",
-			paddingInline: "20rem"
+			paddingInline: "30rem"
 		}}>
 			<Link to="/feed">
 				<Logo/>

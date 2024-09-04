@@ -1,5 +1,5 @@
 import {Button, ButtonProps, theme} from "antd";
-import {HeartIcon} from "@shared/ui/icons/heart-icon.tsx";
+import {HeartFilled, HeartOutlined} from "@ant-design/icons";
 
 interface Props extends Partial<ButtonProps> {
 	active: boolean;
@@ -12,11 +12,11 @@ export function LikeBtn(props: Props) {
 		<>
 			{
 				props.active ?
-					<Button type="primary" size="small" icon={<HeartIcon/>} {...props}>
+					<Button type="primary" size="small" icon={<HeartFilled/>} {...props}>
 						189
 					</Button>
 					:
-					<Button size="small" icon={<HeartIcon style={{fill: colorPrimary}}/>} {...props}>
+					<Button size="small" icon={<HeartOutlined style={{color: colorPrimary}}/>} {...props}>
 						188
 					</Button>
 			}
