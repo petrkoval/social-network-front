@@ -4,7 +4,6 @@ import {PostContent, PostHeader} from "@entities/post";
 import {PostConstructor} from "@widgets/post-constructor";
 
 import "../style/post-constructor.scss";
-import "@entities/post/style/post.scss";
 
 export function PostConstructorPage() {
 	const {

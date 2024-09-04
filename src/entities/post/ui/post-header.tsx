@@ -1,6 +1,8 @@
 import avatarUrl from "@shared/assets/img/avatar.png";
 import {Link} from "react-router-dom";
 
+import "../style/post.scss";
+
 export function PostHeader() {
 	return (
 		<header className="post__header">

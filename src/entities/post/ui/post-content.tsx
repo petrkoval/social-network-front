@@ -1,3 +1,5 @@
+import "../style/post.scss";
+
 interface Props {
 	content: string;
 }

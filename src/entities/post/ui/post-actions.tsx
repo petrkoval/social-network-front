@@ -3,6 +3,8 @@ import {CommentBtn} from "@widgets/comment-btn";
 import {Space} from "antd";
 import {useState} from "react";
 
+import "../style/post.scss";
+
 export function PostActions() {
 	const [liked, setLiked] = useState(false);
 
