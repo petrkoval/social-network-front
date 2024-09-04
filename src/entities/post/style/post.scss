@@ -34,4 +34,8 @@
 	&__time {
 		opacity: .5;
 	}
+
+	&__content {
+		word-break: break-all;
+	}
 }

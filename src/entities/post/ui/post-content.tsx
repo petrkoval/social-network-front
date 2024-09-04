@@ -1,7 +1,11 @@
-export function PostContent() {
+interface Props {
+	content: string;
+}
+
+export function PostContent({content}: Props) {
 	return (
 		<div className="post__content">
-			Всем прывет, это мой новый пост!!!
+			{content}
 		</div>
 	)
 }

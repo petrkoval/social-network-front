@@ -21,7 +21,7 @@ export function PostInFeed() {
 		}}>
 			<PostHeader/>
 
-			<PostContent/>
+			<PostContent content="Всем прывет это мой новый пост!!!"/>
 
 			<PostActions/>
 		</article>
