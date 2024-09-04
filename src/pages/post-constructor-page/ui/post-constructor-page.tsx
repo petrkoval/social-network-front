@@ -32,7 +32,7 @@ export function PostConstructorPage() {
 				borderColor: colorBorder,
 			}}>
 				<PostHeader/>
-				<PostContent content={value}/>
+				{value.length !== 0 && <PostContent content={value}/>}
 			</div>
 		</>
 	)
