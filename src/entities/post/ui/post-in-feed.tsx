@@ -1,4 +1,4 @@
-import {theme} from "antd";
+import {Space, theme} from "antd";
 import {Link} from "react-router-dom";
 import {useState} from "react";
 import {LikeBtn} from "@widgets/like-btn";
@@ -6,6 +6,7 @@ import {LikeBtn} from "@widgets/like-btn";
 import "../style/post.scss";
 
 import avatarUrl from "@shared/assets/img/avatar.png";
+import {CommentBtn} from "@widgets/comment-btn";
 
 export function PostInFeed() {
 	const {
@@ -49,9 +50,10 @@ export function PostInFeed() {
 				Всем прывет, это мой новый пост!!!
 			</div>
 
-			<div className="post__actions">
+			<Space>
 				<LikeBtn active={liked} onClick={toggleLike}/>
-			</div>
+				<CommentBtn/>
+			</Space>
 		</article>
 	)
 }

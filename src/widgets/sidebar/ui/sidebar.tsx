@@ -1,7 +1,7 @@
 import {Menu, MenuProps, theme} from "antd";
 import Sider from "antd/es/layout/Sider";
 import {Link, useLocation} from "react-router-dom";
-import {AlignLeftOutlined, CodeOutlined, FormOutlined, UserOutlined} from "@ant-design/icons";
+import {AlignLeftOutlined, CodeOutlined, FormOutlined, StarOutlined, UserOutlined} from "@ant-design/icons";
 
 export function Sidebar() {
 	const {token: {borderRadiusLG}} = theme.useToken();
@@ -30,6 +30,11 @@ export function Sidebar() {
 			key: "/snippets",
 			label: <Link to="/snippets">Snippets</Link>,
 			icon: <CodeOutlined/>
+		},
+		{
+			key: "/lists",
+			label: <Link to="/lists">Lists</Link>,
+			icon: <StarOutlined/>
 		}
 	];
 
