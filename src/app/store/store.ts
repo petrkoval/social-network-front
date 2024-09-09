@@ -1,9 +1,9 @@
 import {configureStore} from "@reduxjs/toolkit";
-import {postConstructorReducer} from "@widgets/post-constructor";
+import {postConstructorReducer, postConstructorSlice} from "@widgets/post-constructor";
 
 export const store = configureStore({
 	reducer: {
-		[postConstructorReducer.name]: postConstructorReducer
+		[postConstructorSlice.reducerPath]: postConstructorReducer
 	},
 	middleware: (gDM) => gDM(),
 	devTools: process.env.NODE_ENV !== 'production'

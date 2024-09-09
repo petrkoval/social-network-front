@@ -6,8 +6,6 @@ interface Props {
 
 export function PostContent({content}: Props) {
 	return (
-		<div className="post__content">
-			{content}
-		</div>
+		<div className="post__content" dangerouslySetInnerHTML={{__html: content}}/>
 	)
 }

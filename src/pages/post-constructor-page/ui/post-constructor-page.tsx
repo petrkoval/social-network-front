@@ -1,7 +1,7 @@
 import {theme} from "antd";
-import {useState} from "react";
 import {PostContent, PostHeader} from "@entities/post";
-import {PostConstructor} from "@widgets/post-constructor";
+import {PostConstructor, selectViewValue} from "@widgets/post-constructor";
+import {useSelector} from "react-redux";
 
 import "../style/post-constructor-page.scss";
 
@@ -14,17 +14,11 @@ export function PostConstructorPage() {
 		}
 	} = theme.useToken();
 
-	const [value, setValue] = useState('');
-	const [linesCount, setLinesCount] = useState<number>(1);
-
-	const onChange = (value: string) => {
-		setLinesCount(value.split(/\r\n|\r|\n/).length);
-		setValue(value);
-	}
+	const viewValue = useSelector(selectViewValue);
 
 	return (
 		<>
-			<PostConstructor value={value} onChange={onChange} linesCount={linesCount} />
+			<PostConstructor/>
 
 			<div className="post-constructor-page__view post" style={{
 				backgroundColor: colorBgContainer,
@@ -32,7 +26,7 @@ export function PostConstructorPage() {
 				borderColor: colorBorder,
 			}}>
 				<PostHeader/>
-				{value.length !== 0 && <PostContent content={value}/>}
+				{viewValue.length !== 0 && <PostContent content={viewValue}/>}
 			</div>
 		</>
 	)
