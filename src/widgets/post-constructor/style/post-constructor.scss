@@ -6,8 +6,6 @@
 	}
 
 	&__text-area {
-		min-height: 10rem;
-
 		border-bottom-left-radius: unset;
 		border-top-left-radius: unset;
 
@@ -19,8 +17,6 @@
 
 	&__lines-count {
 		width: calc(5rem - 11px);
-		height: calc(100% - 2px);
-		min-height: 32px;
 
 		padding: 4px 11px;
 

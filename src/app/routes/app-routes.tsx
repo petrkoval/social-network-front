@@ -4,6 +4,7 @@ import {AuthenticationPage, LoginForm, RegistrationForm} from "@pages/authentica
 import {AnimatePresence} from "framer-motion";
 import {FeedPage} from "@pages/feed-page";
 import {PostConstructorPage} from "@pages/post-constructor-page";
+import {ErrorPage} from "@pages/error-page";
 
 export function AppRoutes() {
 	const location = useLocation();
@@ -20,6 +21,7 @@ export function AppRoutes() {
 					<Route path="/login" element={<LoginForm/>}/>
 					<Route path="/register" element={<RegistrationForm/>}/>
 				</Route>
+				<Route path="*" element={<ErrorPage/>}/>
 			</Routes>
 		</AnimatePresence>
 	)
