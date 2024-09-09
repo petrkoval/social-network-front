@@ -6,17 +6,19 @@ interface Props extends Partial<ButtonProps> {
 }
 
 export function LikeBtn(props: Props) {
+	const {active, ...restProps} = props;
+
 	const {token: {colorPrimary}} = theme.useToken();
 
 	return (
 		<>
 			{
-				props.active ?
-					<Button type="primary" size="small" icon={<HeartFilled/>} {...props}>
+				active ?
+					<Button type="primary" size="small" icon={<HeartFilled/>} {...restProps}>
 						189
 					</Button>
 					:
-					<Button size="small" icon={<HeartOutlined style={{color: colorPrimary}}/>} {...props}>
+					<Button size="small" icon={<HeartOutlined style={{color: colorPrimary}}/>} {...restProps}>
 						188
 					</Button>
 			}

@@ -5,5 +5,5 @@ import "../style/feed.scss";
 export function Feed() {
 	const posts = [0, 0, 0];
 
-	return posts.map(() => <PostInFeed/>)
+	return posts.map((_, i) => <PostInFeed key={i}/>)
 }
