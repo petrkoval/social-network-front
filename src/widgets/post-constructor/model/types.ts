@@ -7,4 +7,11 @@ export interface PostConstructorState {
 
 export interface PostConstructorOptions {
 	autoRenderTime: number;
+	highlightTheme: HighlightThemes;
+}
+
+export enum HighlightThemes {
+	"vs2015",
+	"srcery",
+	"tokyoNightDark"
 }

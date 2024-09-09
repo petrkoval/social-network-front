@@ -7,7 +7,8 @@ const initialState: PostConstructorState = {
 	viewValue: "",
 	linesCount: 1,
 	options: {
-		autoRenderTime: 0
+		autoRenderTime: 0,
+		highlightTheme: 1
 	}
 }
 
@@ -24,9 +25,6 @@ export const postConstructorSlice = createSlice({
 		changeLinesCount: (state, action: PayloadAction<number>) => {
 			state.linesCount = action.payload;
 		},
-		changeAutoRenderTime: (state, action: PayloadAction<number>) => {
-			state.options.autoRenderTime = action.payload;
-		},
 		setOptions: (state, action: PayloadAction<PostConstructorOptions>) => {
 			state.options = action.payload;
 		}
@@ -37,11 +35,11 @@ export const selectEditorValue = (state: RootState) => state.postConstructor.edi
 export const selectViewValue = (state: RootState) => state.postConstructor.viewValue;
 export const selectLinesCount = (state: RootState) => state.postConstructor.linesCount;
 export const selectAutoRenderTime = (state: RootState) => state.postConstructor.options.autoRenderTime;
+export const selectHighlightTheme = (state: RootState) => state.postConstructor.options.highlightTheme;
 
 export const {
 	changeEditorValue,
 	changeViewValue,
-	changeAutoRenderTime,
 	changeLinesCount,
 	setOptions
 } = postConstructorSlice.actions;

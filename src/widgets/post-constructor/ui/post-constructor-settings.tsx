@@ -1,6 +1,12 @@
-import {Button, Col, Drawer, Form, InputNumber, message, Row, Space} from "antd";
+import {Button, Col, Drawer, Form, InputNumber, message, Row, Select, Space} from "antd";
 import {useDispatch, useSelector} from "react-redux";
-import {PostConstructorOptions, selectAutoRenderTime, setOptions} from "@widgets/post-constructor";
+import {
+	HighlightThemes,
+	PostConstructorOptions,
+	selectAutoRenderTime,
+	selectHighlightTheme,
+	setOptions
+} from "@widgets/post-constructor";
 import {SettingFilled} from "@ant-design/icons";
 import {useState} from "react";
 
@@ -11,9 +17,11 @@ export function PostConstructorSettings() {
 
 	const [settingsOpened, setSettingsOpened] = useState(false);
 	const autoRenderTime = useSelector(selectAutoRenderTime);
+	const highlightTheme = useSelector(selectHighlightTheme);
 
 	const initialFormValue: PostConstructorOptions = {
-		autoRenderTime
+		autoRenderTime,
+		highlightTheme
 	};
 
 	const onFinish = (data: PostConstructorOptions) => {
@@ -58,6 +66,15 @@ export function PostConstructorSettings() {
 											 max={100}
 											 addonAfter="сек"
 								/>
+							</Form.Item>
+						</Col>
+						<Col span={24}>
+							<Form.Item<PostConstructorOptions> name="highlightTheme" label="Подсветка синтаксиса">
+								<Select options={[
+									{value: HighlightThemes.vs2015, label: "VS Code 2015"},
+									{value: HighlightThemes.srcery, label: "Srcery"},
+									{value: HighlightThemes.tokyoNightDark, label: "Tokyo Night Dark"},
+								]}/>
 							</Form.Item>
 						</Col>
 					</Row>

@@ -1,4 +1,5 @@
 import "../style/post.scss";
+import {ThemeProvider} from "@shared/ui/highlight-js-themes";
 
 interface Props {
 	content: string;
@@ -6,6 +7,9 @@ interface Props {
 
 export function PostContent({content}: Props) {
 	return (
-		<div className="post__content" dangerouslySetInnerHTML={{__html: content}}/>
+		<>
+			<ThemeProvider/>
+			<div className="post__content" dangerouslySetInnerHTML={{__html: content}}/>
+		</>
 	)
 }

@@ -1,11 +1,13 @@
 import {theme} from "antd";
 import TextArea from "antd/es/input/TextArea";
 import markdownit from 'markdown-it'
+import hljs from "highlight.js";
 import {
 	changeEditorValue,
 	changeLinesCount,
 	changeViewValue,
-	PostConstructorActions, selectAutoRenderTime,
+	PostConstructorActions,
+	selectAutoRenderTime,
 	selectEditorValue,
 	selectLinesCount
 } from "@widgets/post-constructor";
@@ -20,7 +22,14 @@ export function PostConstructor() {
 		linkify: true,
 		typographer: true,
 		xhtmlOut: true,
-		breaks: true
+		breaks: true,
+		highlight: (str, lang) => {
+			if (lang && hljs.getLanguage(lang)) {
+				return hljs.highlight(str, {language: lang}).value;
+			}
+
+			return '';
+		}
 	});
 
 	const {
