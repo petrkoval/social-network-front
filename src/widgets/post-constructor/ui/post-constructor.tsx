@@ -14,9 +14,18 @@ import {
 import {useDispatch, useSelector} from "react-redux";
 
 import "../style/post-constructor.scss";
+import {useEffect} from "react";
 
 export function PostConstructor() {
 	const dispatch = useDispatch();
+	const {
+		token: {
+			colorBorder,
+			colorBgContainer,
+			borderRadiusLG
+		}
+	} = theme.useToken();
+
 	const md = markdownit({
 		html: true,
 		linkify: true,
@@ -32,16 +41,8 @@ export function PostConstructor() {
 		}
 	});
 
-	const {
-		token: {
-			colorBorder,
-			colorBgContainer,
-			borderRadiusLG
-		}
-	} = theme.useToken();
-
 	const linesCount = useSelector(selectLinesCount);
-	const value = useSelector(selectEditorValue);
+	const editorValue = useSelector(selectEditorValue);
 	const autoRenderTime = useSelector(selectAutoRenderTime);
 
 	const onChange = (value: string) => {
@@ -49,11 +50,16 @@ export function PostConstructor() {
 
 		dispatch(changeEditorValue(value));
 		dispatch(changeLinesCount(lines));
-
-		setTimeout(() => {
-			dispatch(changeViewValue(md.render(value)));
-		}, autoRenderTime * 1000);
 	}
+
+	// dispatch changeViewValue with debounce
+	useEffect(() => {
+		const debounceTimer = setTimeout(() => {
+			dispatch(changeViewValue(md.render(editorValue)));
+		}, autoRenderTime);
+
+		return () => clearTimeout(debounceTimer);
+	}, [editorValue]);
 
 	const countLinesInText = (data: string) => {
 		return data.split(/\r\n|\r|\n/).length;
@@ -79,7 +85,7 @@ export function PostConstructor() {
 						  style={{lineHeight: "1.5rem"}}
 						  placeholder="Начните писать код..."
 						  autoSize
-						  value={value}
+						  value={editorValue}
 						  onChange={e => onChange(e.target.value)}
 						  spellCheck={false}
 				/>

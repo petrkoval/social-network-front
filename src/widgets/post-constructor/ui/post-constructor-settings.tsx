@@ -63,8 +63,8 @@ export function PostConstructorSettings() {
 						<Col span={20}>
 							<Form.Item<PostConstructorOptions> name="autoRenderTime" label="Время авторендера">
 								<InputNumber min={0}
-											 max={100}
-											 addonAfter="сек"
+											 max={10000}
+											 addonAfter="мс"
 								/>
 							</Form.Item>
 						</Col>
