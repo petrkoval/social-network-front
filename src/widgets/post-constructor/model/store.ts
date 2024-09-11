@@ -1,4 +1,4 @@
-import {PostConstructorOptions, PostConstructorState} from "@widgets/post-constructor";
+import {HighlightThemes, PostConstructorOptions, PostConstructorState} from "@widgets/post-constructor";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "@app/store";
 
@@ -8,7 +8,7 @@ const initialState: PostConstructorState = {
 	linesCount: 1,
 	options: {
 		autoRenderTime: 0,
-		highlightTheme: 1
+		highlightTheme: "vs2015" as HighlightThemes
 	}
 }
 

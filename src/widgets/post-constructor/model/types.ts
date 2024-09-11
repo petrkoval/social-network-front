@@ -11,7 +11,8 @@ export interface PostConstructorOptions {
 }
 
 export enum HighlightThemes {
-	"vs2015",
-	"srcery",
-	"tokyoNightDark"
+	vs2015 = "vs2015",
+	srcery = "srcery",
+	tokyoNightDark = "tokyoNightDark",
+	arta = "arta"
 }

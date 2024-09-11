@@ -74,6 +74,7 @@ export function PostConstructorSettings() {
 									{value: HighlightThemes.vs2015, label: "VS Code 2015"},
 									{value: HighlightThemes.srcery, label: "Srcery"},
 									{value: HighlightThemes.tokyoNightDark, label: "Tokyo Night Dark"},
+									{value: HighlightThemes.arta, label: "Arta"},
 								]}/>
 							</Form.Item>
 						</Col>

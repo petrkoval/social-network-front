@@ -1,0 +1,17 @@
+@use "sass:meta";
+
+[data-theme="vs2015"] {
+	@include meta.load-css("highlight.js/styles/vs2015.min.css");
+}
+
+[data-theme="srcery"] {
+	@include meta.load-css("highlight.js/styles/srcery.min.css");
+}
+
+[data-theme="tokyoNightDark"] {
+	@include meta.load-css("highlight.js/styles/tokyo-night-dark.min.css");
+}
+
+[data-theme="arta"] {
+	@include meta.load-css("highlight.js/styles/arta.min.css");
+}
