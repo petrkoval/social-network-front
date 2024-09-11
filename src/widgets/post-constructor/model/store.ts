@@ -8,7 +8,7 @@ const initialState: PostConstructorState = {
 	linesCount: 1,
 	options: {
 		autoRenderTime: 0,
-		highlightTheme: "vs2015" as HighlightThemes
+		highlightTheme: "codium" as HighlightThemes
 	}
 }
 

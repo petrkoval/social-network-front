@@ -11,8 +11,14 @@ export interface PostConstructorOptions {
 }
 
 export enum HighlightThemes {
+	codium = "codium",
 	vs2015 = "vs2015",
-	srcery = "srcery",
+	atomOneDark = "atomOneDark",
 	tokyoNightDark = "tokyoNightDark",
-	arta = "arta"
+	arta = "arta",
+	srcery = "srcery",
+	base16_3024 = "base16_3024",
+	dracula = "dracula",
+	monokai = "monokai",
+	base16_edge = "base16_edge",
 }

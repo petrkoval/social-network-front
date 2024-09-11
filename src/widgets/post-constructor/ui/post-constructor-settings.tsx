@@ -71,10 +71,16 @@ export function PostConstructorSettings() {
 						<Col span={24}>
 							<Form.Item<PostConstructorOptions> name="highlightTheme" label="Подсветка синтаксиса">
 								<Select options={[
+									{value: HighlightThemes.codium, label: "Codium"},
 									{value: HighlightThemes.vs2015, label: "VS Code 2015"},
-									{value: HighlightThemes.srcery, label: "Srcery"},
+									{value: HighlightThemes.atomOneDark, label: "Atom One Dark"},
 									{value: HighlightThemes.tokyoNightDark, label: "Tokyo Night Dark"},
+									{value: HighlightThemes.dracula, label: "Dracula"},
+									{value: HighlightThemes.monokai, label: "Monokai"},
 									{value: HighlightThemes.arta, label: "Arta"},
+									{value: HighlightThemes.srcery, label: "Srcery"},
+									{value: HighlightThemes.base16_3024, label: "3024"},
+									{value: HighlightThemes.base16_edge, label: "Edge"},
 								]}/>
 							</Form.Item>
 						</Col>

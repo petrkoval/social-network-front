@@ -4,7 +4,7 @@ import {selectHighlightTheme} from "@widgets/post-constructor";
 import "../style/post.scss";
 import "../style/themes.scss";
 
-// import "highlight.js/styles/arta.min.css"
+import "highlight.js/styles/vs2015.css"
 interface Props {
 	content: string;
 }

@@ -1,5 +1,9 @@
 @use "sass:meta";
 
+[data-theme="codium"] {
+	@include meta.load-css("./codium-theme.css");
+}
+
 [data-theme="vs2015"] {
 	@include meta.load-css("highlight.js/styles/vs2015.min.css");
 }
@@ -14,4 +18,24 @@
 
 [data-theme="arta"] {
 	@include meta.load-css("highlight.js/styles/arta.min.css");
+}
+
+[data-theme="atomOneDark"] {
+	@include meta.load-css("highlight.js/styles/atom-one-dark-reasonable.min.css");
+}
+
+[data-theme="base16_3024"] {
+	@include meta.load-css("highlight.js/styles/base16/3024.min.css");
+}
+
+[data-theme="dracula"] {
+	@include meta.load-css("highlight.js/styles/base16/dracula.min.css");
+}
+
+[data-theme="monokai"] {
+	@include meta.load-css("highlight.js/styles/monokai.min.css");
+}
+
+[data-theme="base16_edge"] {
+	@include meta.load-css("highlight.js/styles/base16/edge-dark.min.css");
 }
