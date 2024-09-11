@@ -38,5 +38,9 @@
 	&__content {
 		word-break: break-all;
 		overflow-x: auto;
+
+		li {
+			list-style-position: inside;
+		}
 	}
 }

@@ -83,7 +83,7 @@ export function PostConstructor() {
 
 				<TextArea className="post-constructor__text-area"
 						  style={{lineHeight: "1.5rem"}}
-						  placeholder="Начните писать код..."
+						  placeholder="Начните писать на Markdown..."
 						  autoSize
 						  value={editorValue}
 						  onChange={e => onChange(e.target.value)}
