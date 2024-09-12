@@ -8,7 +8,9 @@ const initialState: PostConstructorState = {
 	linesCount: 1,
 	options: {
 		autoRenderTime: 0,
-		highlightTheme: "codium" as HighlightThemes
+		highlightTheme: "codium" as HighlightThemes,
+		indentSize: 4,
+		indentType: "tab"
 	}
 }
 
@@ -36,6 +38,8 @@ export const selectViewValue = (state: RootState) => state.postConstructor.viewV
 export const selectLinesCount = (state: RootState) => state.postConstructor.linesCount;
 export const selectAutoRenderTime = (state: RootState) => state.postConstructor.options.autoRenderTime;
 export const selectHighlightTheme = (state: RootState) => state.postConstructor.options.highlightTheme;
+export const selectIndentSize = (state: RootState) => state.postConstructor.options.indentSize;
+export const selectIndentType = (state: RootState) => state.postConstructor.options.indentType;
 
 export const {
 	changeEditorValue,

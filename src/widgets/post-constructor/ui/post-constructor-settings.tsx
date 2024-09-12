@@ -4,7 +4,7 @@ import {
 	HighlightThemes,
 	PostConstructorOptions,
 	selectAutoRenderTime,
-	selectHighlightTheme,
+	selectHighlightTheme, selectIndentSize, selectIndentType,
 	setOptions
 } from "@widgets/post-constructor";
 import {SettingFilled} from "@ant-design/icons";
@@ -18,10 +18,14 @@ export function PostConstructorSettings() {
 	const [settingsOpened, setSettingsOpened] = useState(false);
 	const autoRenderTime = useSelector(selectAutoRenderTime);
 	const highlightTheme = useSelector(selectHighlightTheme);
+	const indentSize = useSelector(selectIndentSize);
+	const indentType = useSelector(selectIndentType);
 
 	const initialFormValue: PostConstructorOptions = {
 		autoRenderTime,
-		highlightTheme
+		highlightTheme,
+		indentSize,
+		indentType,
 	};
 
 	const onFinish = (data: PostConstructorOptions) => {
@@ -59,7 +63,7 @@ export function PostConstructorSettings() {
 					  form={form}
 					  onFinish={onFinish}
 					  initialValues={initialFormValue}>
-					<Row justify="center">
+					<Row>
 						<Col span={20}>
 							<Form.Item<PostConstructorOptions> name="autoRenderTime" label="Время авторендера">
 								<InputNumber min={0}
@@ -68,7 +72,9 @@ export function PostConstructorSettings() {
 								/>
 							</Form.Item>
 						</Col>
-						<Col span={24}>
+					</Row>
+					<Row>
+						<Col span={20}>
 							<Form.Item<PostConstructorOptions> name="highlightTheme" label="Подсветка синтаксиса">
 								<Select options={[
 									{value: HighlightThemes.codium, label: "Codium"},
@@ -82,6 +88,23 @@ export function PostConstructorSettings() {
 									{value: HighlightThemes.base16_3024, label: "3024"},
 									{value: HighlightThemes.base16_edge, label: "Edge"},
 								]}/>
+							</Form.Item>
+						</Col>
+					</Row>
+					<Row>
+						<Col span={20}>
+							<Form.Item label="Отступ">
+								<Space.Compact block>
+									<Form.Item<PostConstructorOptions> name="indentSize" noStyle>
+										<InputNumber min={1} max={10}/>
+									</Form.Item>
+									<Form.Item<PostConstructorOptions> name="indentType" noStyle>
+										<Select options={[
+											{value: "tab", label: "Табуляция"},
+											{value: "space", label: "Пробел"},
+										]}/>
+									</Form.Item>
+								</Space.Compact>
 							</Form.Item>
 						</Col>
 					</Row>

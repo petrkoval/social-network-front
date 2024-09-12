@@ -8,6 +8,8 @@ export interface PostConstructorState {
 export interface PostConstructorOptions {
 	autoRenderTime: number;
 	highlightTheme: HighlightThemes;
+	indentSize: number;
+	indentType: "tab" | "space";
 }
 
 export enum HighlightThemes {
