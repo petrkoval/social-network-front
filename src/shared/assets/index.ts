@@ -1,3 +1,3 @@
-export * from "./img/img.png";
+export * from "./img/avatar.png";
 
-export * from "./img/icon.png";
+export * from "./icons/code-icon";
