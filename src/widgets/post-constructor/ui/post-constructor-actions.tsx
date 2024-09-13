@@ -5,7 +5,8 @@ import {
 	CaretDownOutlined,
 	CaretUpFilled,
 	CodeOutlined,
-	EllipsisOutlined, EnterOutlined,
+	EllipsisOutlined,
+	EnterOutlined,
 	FieldStringOutlined,
 	FileImageOutlined,
 	FontColorsOutlined,
@@ -23,10 +24,10 @@ import {
 	UnorderedListOutlined,
 	VerticalAlignBottomOutlined
 } from "@ant-design/icons";
-import {PostConstructorSettings} from "@widgets/post-constructor";
+import {PostConstructorActionsEnum, PostConstructorSettings} from "@widgets/post-constructor";
 
 interface Props {
-	handleHeaderActionPress: (action: string) => void
+	handleAction: (actionType: PostConstructorActionsEnum, action: string) => void
 }
 
 export function PostConstructorActions(props: Props) {
@@ -82,7 +83,7 @@ export function PostConstructorActions(props: Props) {
 	];
 
 	const onHeaderActionClick: MenuProps['onClick'] = ({key}) => {
-		props.handleHeaderActionPress(key);
+		props.handleAction(PostConstructorActionsEnum.lineStartInsert, key);
 	}
 
 	return (

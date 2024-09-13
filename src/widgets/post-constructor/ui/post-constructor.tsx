@@ -2,7 +2,7 @@ import {
 	PostConstructorActions,
 	selectIndentSize,
 	selectLinesCount,
-	useDispatchChanges,
+	useDispatchChanges, useHandleActions,
 	useHandleHotkeys
 } from "@widgets/post-constructor";
 import {theme} from "antd";
@@ -28,37 +28,11 @@ export function PostConstructor() {
 
 	const [editorValue, setEditorValue] = useDispatchChanges();
 	const handleHotKeys = useHandleHotkeys(textAreaRef, setEditorValue);
-
-	const handleHeaderActionPress = (action: string) => {
-		const textArea = getTextArea();
-		if (textArea) {
-			const cursorPosition = textArea.selectionStart;
-			const startOfCurrentLine = editorValue.lastIndexOf("\n", cursorPosition - 1) + 1;
-
-			let newEditorValue: string;
-
-			if (startOfCurrentLine !== -1) {
-				newEditorValue = editorValue.slice(0, startOfCurrentLine) + action + editorValue.slice(startOfCurrentLine);
-			} else {
-				newEditorValue = action + editorValue;
-			}
-
-			setEditorValue(newEditorValue);
-
-			setTimeout(() => {
-				textArea.focus();
-				textArea.selectionStart = textArea.selectionEnd = cursorPosition + action.length
-			});
-		}
-	}
-
-	const getTextArea = () => {
-		return textAreaRef.current?.resizableTextArea?.textArea;
-	}
+	const handleAction = useHandleActions(textAreaRef, setEditorValue);
 
 	return (
 		<div className="post-constructor">
-			<PostConstructorActions handleHeaderActionPress={handleHeaderActionPress}/>
+			<PostConstructorActions handleAction={handleAction}/>
 
 			<div className="post-constructor__text-enter">
 				<ul className="post-constructor__lines-count" style={{
