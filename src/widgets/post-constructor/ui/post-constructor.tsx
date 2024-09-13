@@ -2,7 +2,8 @@ import {
 	PostConstructorActions,
 	selectIndentSize,
 	selectLinesCount,
-	useDispatchChanges, useHandleActions,
+	useDispatchChanges,
+	useHandleActions,
 	useHandleHotkeys
 } from "@widgets/post-constructor";
 import {theme} from "antd";
@@ -27,8 +28,8 @@ export function PostConstructor() {
 	const textAreaRef = useRef<TextAreaRef>(null);
 
 	const [editorValue, setEditorValue] = useDispatchChanges();
-	const handleHotKeys = useHandleHotkeys(textAreaRef, setEditorValue);
-	const handleAction = useHandleActions(textAreaRef, setEditorValue);
+	const handleHotKeys = useHandleHotkeys(textAreaRef);
+	const handleAction = useHandleActions(textAreaRef);
 
 	return (
 		<div className="post-constructor">

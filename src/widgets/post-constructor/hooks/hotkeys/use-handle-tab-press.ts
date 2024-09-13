@@ -1,13 +1,10 @@
 import {useSelector} from "react-redux";
-import {selectEditorValue, selectIndentSize, selectIndentType} from "@widgets/post-constructor";
+import {selectIndentSize, selectIndentType, useDispatchChanges} from "@widgets/post-constructor";
 
-export function useHandleTabPress(
-	textArea: HTMLTextAreaElement | undefined,
-	setEditorValue: (value: string) => void
-) {
+export function useHandleTabPress(textArea: HTMLTextAreaElement | undefined) {
 	const indentSize = useSelector(selectIndentSize);
 	const indentType = useSelector(selectIndentType);
-	const editorValue = useSelector(selectEditorValue);
+	const [editorValue, setEditorValue] = useDispatchChanges();
 
 	return function () {
 		if (textArea) {

@@ -1,11 +1,7 @@
-import {useSelector} from "react-redux";
-import {selectEditorValue} from "@widgets/post-constructor";
+import {useDispatchChanges} from "@widgets/post-constructor";
 
-export function useHandleLineStartInsert(
-	textArea: HTMLTextAreaElement | undefined,
-	setEditorValue: (value: string) => void
-) {
-	const editorValue = useSelector(selectEditorValue);
+export function useHandleLineStartInsert(textArea: HTMLTextAreaElement | undefined) {
+	const [editorValue, setEditorValue] = useDispatchChanges();
 
 	return function (action: string) {
 		if (textArea) {

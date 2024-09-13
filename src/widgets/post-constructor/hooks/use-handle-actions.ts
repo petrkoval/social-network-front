@@ -2,13 +2,10 @@ import {PostConstructorActionsEnum, useHandleLineStartInsert} from "@widgets/pos
 import React from "react";
 import {TextAreaRef} from "antd/es/input/TextArea";
 
-export function useHandleActions(
-	textAreaRef: React.RefObject<TextAreaRef>,
-	setEditorValue: (value: string) => void
-) {
+export function useHandleActions(textAreaRef: React.RefObject<TextAreaRef>) {
 	const textArea = getTextArea();
 
-	const handleLineStartInsertAction = useHandleLineStartInsert(textArea, setEditorValue);
+	const handleLineStartInsertAction = useHandleLineStartInsert(textArea);
 
 	return function (actionType: PostConstructorActionsEnum, action: string) {
 		switch (actionType) {
