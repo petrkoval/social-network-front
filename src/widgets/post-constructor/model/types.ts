@@ -24,3 +24,11 @@ export enum HighlightThemes {
 	monokai = "monokai",
 	base16_edge = "base16_edge",
 }
+
+export enum PostConstructorActionsEnum {
+	lineStartInsert,
+	wordWrap,
+	newLineInsert,
+	inlineInsert,
+	image,
+}

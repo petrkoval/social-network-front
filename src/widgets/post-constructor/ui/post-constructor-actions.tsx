@@ -4,14 +4,17 @@ import {
 	BorderVerticleOutlined,
 	CaretDownOutlined,
 	CaretUpFilled,
-	CodeOutlined, EllipsisOutlined,
+	CodeOutlined,
+	EllipsisOutlined, EnterOutlined,
 	FieldStringOutlined,
 	FileImageOutlined,
 	FontColorsOutlined,
 	FontSizeOutlined,
 	ItalicOutlined,
 	LinkOutlined,
-	OrderedListOutlined, SelectOutlined,
+	OrderedListOutlined,
+	QuestionCircleOutlined,
+	SelectOutlined,
 	SnippetsOutlined,
 	StrikethroughOutlined,
 	TableOutlined,
@@ -22,10 +25,14 @@ import {
 } from "@ant-design/icons";
 import {PostConstructorSettings} from "@widgets/post-constructor";
 
-export function PostConstructorActions() {
+interface Props {
+	handleHeaderActionPress: (action: string) => void
+}
+
+export function PostConstructorActions(props: Props) {
 
 	const headerMenuItems: MenuProps['items'] = new Array(6).fill(null).map((_, i) => ({
-		key: i,
+		key: "#".repeat(i + 1) + " ",
 		label: `H${i + 1}`
 	}));
 
@@ -66,13 +73,23 @@ export function PostConstructorActions() {
 				<Space><SelectOutlined/>Экранирование</Space>
 			)
 		},
+		{
+			key: '6',
+			label: (
+				<Space><EnterOutlined/>Перенос строки</Space>
+			)
+		},
 	];
+
+	const onHeaderActionClick: MenuProps['onClick'] = ({key}) => {
+		props.handleHeaderActionPress(key);
+	}
 
 	return (
 		<Flex justify="space-between" align="center" style={{marginBlock: ".5rem 1rem"}}>
 			<Space>
 				<Tooltip title="Заголовок">
-					<Dropdown menu={{items: headerMenuItems}}>
+					<Dropdown menu={{items: headerMenuItems, onClick: onHeaderActionClick}}>
 						<Button icon={<FontSizeOutlined/>}>
 							<CaretDownOutlined/>
 						</Button>
@@ -136,6 +153,10 @@ export function PostConstructorActions() {
 			</Space>
 
 			<Space>
+				<Tooltip title="Горячие клавиши">
+					<Button type="link" icon={<QuestionCircleOutlined/>}/>
+				</Tooltip>
+
 				<Radio.Group defaultValue="MP" buttonStyle="solid">
 					<Tooltip title="Расширенный режим">
 						<Radio.Button value="R">R</Radio.Button>

@@ -1,25 +1,18 @@
+import {
+	PostConstructorActions,
+	selectIndentSize,
+	selectLinesCount,
+	useDispatchChanges,
+	useHandleHotkeys
+} from "@widgets/post-constructor";
 import {theme} from "antd";
 import TextArea, {TextAreaRef} from "antd/es/input/TextArea";
-import markdownit from 'markdown-it'
-import hljs from "highlight.js";
-import {
-	changeEditorValue,
-	changeLinesCount,
-	changeViewValue,
-	PostConstructorActions,
-	selectAutoRenderTime,
-	selectEditorValue,
-	selectIndentSize,
-	selectIndentType,
-	selectLinesCount
-} from "@widgets/post-constructor";
-import {useDispatch, useSelector} from "react-redux";
-import React, {useEffect, useRef} from "react";
+import {useSelector} from "react-redux";
+import {useRef} from "react";
 
 import "../style/post-constructor.scss";
 
 export function PostConstructor() {
-	const dispatch = useDispatch();
 	const {
 		token: {
 			colorBorder,
@@ -28,76 +21,34 @@ export function PostConstructor() {
 		}
 	} = theme.useToken();
 
-	const md = markdownit({
-		html: true,
-		linkify: true,
-		typographer: true,
-		xhtmlOut: true,
-		breaks: true,
-		highlight: (str, lang) => {
-			if (lang && hljs.getLanguage(lang)) {
-				return hljs.highlight(str, {language: lang}).value;
-			}
-
-			return '';
-		}
-	});
-
 	const linesCount = useSelector(selectLinesCount);
-	const editorValue = useSelector(selectEditorValue);
-	const autoRenderTime = useSelector(selectAutoRenderTime);
 	const indentSize = useSelector(selectIndentSize);
-	const indentType = useSelector(selectIndentType);
 
 	const textAreaRef = useRef<TextAreaRef>(null);
 
-	const handleChange = (value: string) => {
-		const lines = countLinesInText(value);
+	const [editorValue, setEditorValue] = useDispatchChanges();
+	const handleHotKeys = useHandleHotkeys(textAreaRef, setEditorValue);
 
-		dispatch(changeEditorValue(value));
-		dispatch(changeLinesCount(lines));
-	}
-
-	// dispatch changeViewValue with debounce
-	useEffect(() => {
-		const debounceTimer = setTimeout(() => {
-			dispatch(changeViewValue(md.render(editorValue)));
-		}, autoRenderTime);
-
-		return () => clearTimeout(debounceTimer);
-	}, [editorValue]);
-
-	const countLinesInText = (data: string) => {
-		return data.split(/\r\n|\r|\n/).length;
-	}
-
-	const onKeyDown = (e: React.KeyboardEvent) => {
-		switch (e.key) {
-			case "Tab":
-				handleTabPress(e);
-				break;
-			default:
-				return;
-		}
-	}
-
-	const handleTabPress = (e: React.KeyboardEvent) => {
-		e.preventDefault();
-
+	const handleHeaderActionPress = (action: string) => {
 		const textArea = getTextArea();
 		if (textArea) {
 			const cursorPosition = textArea.selectionStart;
+			const startOfCurrentLine = editorValue.lastIndexOf("\n", cursorPosition - 1) + 1;
 
-			switch (indentType) {
-				case "space":
-					insertSpaceIndentsIntoTextArea(cursorPosition);
-					preserveCursorPosition(textArea, cursorPosition, indentSize);
-					break;
-				case "tab":
-					insertTabIndentsIntoTextArea(cursorPosition);
-					preserveCursorPosition(textArea, cursorPosition, 1);
-					break;
+			let newEditorValue: string;
+
+			if (startOfCurrentLine !== -1) {
+				newEditorValue = editorValue.slice(0, startOfCurrentLine) + action + editorValue.slice(startOfCurrentLine);
+			} else {
+				newEditorValue = action + editorValue;
 			}
+
+			setEditorValue(newEditorValue);
+
+			setTimeout(() => {
+				textArea.focus();
+				textArea.selectionStart = textArea.selectionEnd = cursorPosition + action.length
+			});
 		}
 	}
 
@@ -105,23 +56,9 @@ export function PostConstructor() {
 		return textAreaRef.current?.resizableTextArea?.textArea;
 	}
 
-	const insertSpaceIndentsIntoTextArea = (cursorPosition: number) => {
-		const newEditorValue = editorValue.slice(0, cursorPosition) + " ".repeat(indentSize) + editorValue.slice(cursorPosition);
-		handleChange(newEditorValue);
-	}
-
-	const insertTabIndentsIntoTextArea = (cursorPosition: number) => {
-		const newEditorValue = editorValue.slice(0, cursorPosition) + "\t" + editorValue.slice(cursorPosition);
-		handleChange(newEditorValue);
-	}
-
-	const preserveCursorPosition = (textArea: HTMLTextAreaElement, cursorPosition: number, indentSize: number) => {
-		setTimeout(() => textArea.selectionStart = textArea.selectionEnd = cursorPosition + indentSize);
-	}
-
 	return (
 		<div className="post-constructor">
-			<PostConstructorActions/>
+			<PostConstructorActions handleHeaderActionPress={handleHeaderActionPress}/>
 
 			<div className="post-constructor__text-enter">
 				<ul className="post-constructor__lines-count" style={{
@@ -141,8 +78,8 @@ export function PostConstructor() {
 						  autoSize
 						  value={editorValue}
 						  ref={textAreaRef}
-						  onChange={e => handleChange(e.target.value)}
-						  onKeyDown={e => onKeyDown(e)}
+						  onChange={e => setEditorValue(e.target.value)}
+						  onKeyDown={e => handleHotKeys(e)}
 						  spellCheck={false}
 				/>
 			</div>
