@@ -12,6 +12,12 @@ export interface PostConstructorOptions {
 	indentType: "tab" | "space";
 }
 
+export interface Selection {
+	start: number;
+	end: number;
+	direction: "forward" | "backward" | "none";
+}
+
 export enum HighlightThemes {
 	codium = "codium",
 	vs2015 = "vs2015",
