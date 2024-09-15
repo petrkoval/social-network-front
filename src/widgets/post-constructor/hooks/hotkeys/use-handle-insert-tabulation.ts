@@ -1,7 +1,7 @@
 import {useSelector} from "react-redux";
 import {selectIndentSize, selectIndentType, Selection, useDispatchChanges} from "@widgets/post-constructor";
 
-export function useHandleTabPress(textArea: HTMLTextAreaElement | undefined) {
+export function useHandleInsertTabulation(textArea: HTMLTextAreaElement | undefined) {
 	const indentSize = useSelector(selectIndentSize);
 	const indentType = useSelector(selectIndentType);
 	const [editorValue, setEditorValue] = useDispatchChanges();
@@ -31,26 +31,30 @@ export function useHandleTabPress(textArea: HTMLTextAreaElement | undefined) {
 
 			const selectionStart = firstSelectedLineStartIndex > -1 ? firstSelectedLineStartIndex : 0;
 			const selectedText = editorValue.slice(selectionStart, selection.end);
-			const selectedLinesExceptFirst = (selectedText.match(/\n/g) || []).length;
+			const selectedLines = (selectedText.match(/\n/g) || []).length + 1;
 
 			const textBeforeSelection = editorValue.slice(0, selectionStart);
 			const textAfterSelection = editorValue.slice(selection.end);
-			const newSelectedValue = "\t" + editorValue.slice(selectionStart, selection.end).replace(/\n/g, `\n${indent}`);
+			const newSelectedValue = indent + editorValue.slice(selectionStart, selection.end).replace(/\n/g, `\n${indent}`);
 			setEditorValue(textBeforeSelection + newSelectedValue + textAfterSelection);
 
-			setTimeout(() => {
-				textArea.selectionStart = selection.start + indent.length;
-				textArea.selectionEnd = selection.end + indent.length * selectedLinesExceptFirst + 1;
-				textArea.selectionDirection = selection.direction;
-			});
+			const newSelectionStart = selection.start + indent.length;
+			const newSelectionEnd = selection.end + indent.length * selectedLines;
+			preserveSelection(textArea, newSelectionStart, newSelectionEnd);
 		} else {
 			const newEditorValue = editorValue.slice(0, selection.start) + indent + editorValue.slice(selection.end);
 			setEditorValue(newEditorValue);
 
-			setTimeout(() => {
-				textArea.selectionStart = textArea.selectionEnd = selection.start + indent.length;
-			});
+			const newSelection = selection.start + indent.length;
+			preserveSelection(textArea, newSelection);
 		}
+	}
+
+	function preserveSelection(textArea: HTMLTextAreaElement, start: number, end?: number) {
+		setTimeout(() => {
+			textArea.selectionStart = start;
+			textArea.selectionEnd = end ? end : start;
+		});
 	}
 
 	function isMultiLinesSelected(selection: Selection) {
