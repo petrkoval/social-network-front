@@ -1,27 +1,43 @@
-import {useDispatchChanges} from "@widgets/post-constructor";
+import {Selection, useDispatchChanges, useHelpers} from "@widgets/post-constructor";
 
 export function useHandleLineStartInsert(textArea: HTMLTextAreaElement | undefined) {
-	const [editorValue, setEditorValue] = useDispatchChanges();
+	const [, setEditorValue] = useDispatchChanges();
+	const {getIndexesOfSelectedLines, divideEditorValue} = useHelpers();
 
 	return function (action: string) {
 		if (textArea) {
-			const cursorPosition = textArea.selectionStart;
-			const startOfCurrentLine = editorValue.lastIndexOf("\n", cursorPosition - 1) + 1;
+			const selection: Selection = {
+				start: textArea.selectionStart,
+				end: textArea.selectionEnd,
+				direction: textArea.selectionDirection
+			};
 
-			let newEditorValue: string;
+			const [startIndex, endIndex] = getIndexesOfSelectedLines(selection);
+			const [beforeValue, selectedValue, afterValue] = divideEditorValue(startIndex, endIndex);
 
-			if (startOfCurrentLine !== -1) {
-				newEditorValue = editorValue.slice(0, startOfCurrentLine) + action + editorValue.slice(startOfCurrentLine);
-			} else {
-				newEditorValue = action + editorValue;
-			}
+			const newSelectedValue = insertActions(selectedValue, action);
+			const replacements = countReplacements(selectedValue, action);
+			setEditorValue(beforeValue + newSelectedValue + afterValue);
 
-			setEditorValue(newEditorValue);
-
-			setTimeout(() => {
-				textArea.focus();
-				textArea.selectionStart = textArea.selectionEnd = cursorPosition + action.length
-			});
+			preserveSelection(textArea, selection, action, replacements);
 		}
+	}
+
+	function insertActions(selectedValue: string, action: string) {
+		const replacement = new RegExp('^', "gm");
+		return selectedValue.replace(replacement, action);
+	}
+
+	function countReplacements(selectedValue: string, action: string) {
+		const replacement = new RegExp('^' + action, "gm");
+		return selectedValue.match(replacement)?.length || 0;
+	}
+
+	function preserveSelection(textArea: HTMLTextAreaElement, selection: Selection, action: string, replacements: number) {
+		setTimeout(() => {
+			textArea.selectionStart = selection.start + (replacements ? action.length : 0);
+			textArea.selectionEnd = selection.end + replacements * action.length;
+			textArea.selectionDirection = selection.direction;
+		});
 	}
 }

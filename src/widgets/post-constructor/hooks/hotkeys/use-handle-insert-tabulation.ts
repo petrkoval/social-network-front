@@ -1,10 +1,11 @@
 import {useSelector} from "react-redux";
-import {selectIndentSize, selectIndentType, Selection, useDispatchChanges} from "@widgets/post-constructor";
+import {selectIndentSize, selectIndentType, Selection, useDispatchChanges, useHelpers} from "@widgets/post-constructor";
 
 export function useHandleInsertTabulation(textArea: HTMLTextAreaElement | undefined) {
 	const indentSize = useSelector(selectIndentSize);
 	const indentType = useSelector(selectIndentType);
 	const [editorValue, setEditorValue] = useDispatchChanges();
+	const {getIndexesOfSelectedLines, divideEditorValue} = useHelpers();
 
 	return function () {
 		if (textArea) {
@@ -45,22 +46,6 @@ export function useHandleInsertTabulation(textArea: HTMLTextAreaElement | undefi
 
 	function isMultiLinesSelected(selection: Selection) {
 		return selection.start !== selection.end;
-	}
-
-	function getIndexesOfSelectedLines(selection: Selection): [number, number] {
-		const startIndex = editorValue.lastIndexOf("\n", selection.start - 1) + 1;
-		let endIndex = editorValue.indexOf("\n", selection.end);
-		endIndex = endIndex === -1 ? editorValue.length : endIndex;
-
-		return [startIndex, endIndex];
-	}
-
-	function divideEditorValue(startIndex: number, endIndex: number): [string, string, string] {
-		const beforeValue = editorValue.slice(0, startIndex);
-		const selectedValue = editorValue.slice(startIndex, endIndex);
-		const afterValue = editorValue.slice(endIndex);
-
-		return [beforeValue, selectedValue, afterValue];
 	}
 
 	function insertIndents(selectedValue: string, indent: string) {
