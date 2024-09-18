@@ -27,7 +27,6 @@ export function useHandleRemoveTabulation(textArea: HTMLTextAreaElement | undefi
 
 	function removeIndentsFromTextArea(textArea: HTMLTextAreaElement, selection: Selection, indent: string) {
 		const [startIndex, endIndex] = getIndexesOfSelectedLines(selection);
-
 		const [beforeValue, selectedValue, afterValue] = divideEditorValue(startIndex, endIndex);
 
 		const newSelectedValue = removeIndents(selectedValue, indent);
