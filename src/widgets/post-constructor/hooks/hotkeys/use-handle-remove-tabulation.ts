@@ -55,7 +55,7 @@ export function useHandleRemoveTabulation(textArea: HTMLTextAreaElement | undefi
 
 	function preserveSelection(textArea: HTMLTextAreaElement, selection: Selection, replacements: number) {
 		setTimeout(() => {
-			textArea.selectionStart = selection.start - (replacements ? 1 : 0);
+			textArea.selectionStart = selection.start - (replacements ? indentSize : 0);
 			textArea.selectionEnd = selection.end - replacements;
 			textArea.selectionDirection = selection.direction;
 		});
