@@ -1,0 +1,14 @@
+.hotkeys-popover {
+	list-style-type: none;
+
+	li:not(:last-child) {
+		margin-bottom: .5rem;
+	}
+
+	kbd {
+		border: 1px solid;
+		padding: 2px 4px;
+
+		user-select: none;
+	}
+}
